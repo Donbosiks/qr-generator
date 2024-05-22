@@ -2,11 +2,16 @@ use fast_qr::convert::ConvertError;
 use fast_qr::convert::{image::ImageBuilder, Builder, Shape};
 use fast_qr::qr::QRBuilder;
 
-pub fn render_qr(_link: &str) -> Result<(), ConvertError> {
-        // QRBuilder::new can fail if content is too big for version,
-        // please check before unwrapping.
-        let rend_link = format!("https://yuniversia.eu/{}", _link);
-        let qrcode = QRBuilder::new(&*rend_link)
+
+pub fn render_qr(_link: &str, _qrtype: &str) -> Result<(), ConvertError> {
+
+        let mut _rend_link = format!("https://yuniversia.eu/{}", _link);
+
+        if _qrtype == "offline" {
+                _rend_link = format!("{}", _link);
+        }
+
+        let qrcode = QRBuilder::new(&*_rend_link)
             .build()
             .unwrap();
 
