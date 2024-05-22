@@ -1,11 +1,14 @@
 use fast_qr::convert::ConvertError;
 use fast_qr::convert::{image::ImageBuilder, Builder, Shape};
 use fast_qr::qr::QRBuilder;
-
-
+use std::env;
 pub fn render_qr(_link: &str, _qrtype: &str) -> Result<(), ConvertError> {
 
-        let mut _rend_link = format!("https://yuniversia.eu/{}", _link);
+        let mut domain_url = env::var("DOMAIN_URL").expect("DOMAIN_URL must be set");
+
+        domain_url += _link;
+
+        let mut _rend_link = format!("{}", domain_url);
 
         if _qrtype == "offline" {
                 _rend_link = format!("{}", _link);
