@@ -3,6 +3,7 @@ use diesel::mysql::MysqlConnection;
 use dotenv::dotenv;
 use std::env;
 use crate::schema::qrcode;
+use diesel::RunQueryDsl;
 
 pub fn establish_connection() -> MysqlConnection {
     dotenv().ok();
@@ -26,4 +27,15 @@ pub fn establish_connection() -> MysqlConnection {
 pub struct NewQr<'a> {
     pub indeficator: &'a str,
     pub link: &'a str,
+}
+
+pub fn create_post(conn: &mut MysqlConnection, indeficator: &str, link: &str) -> () {
+    use crate::schema::qrcode;
+
+    let new_qr = NewQr { indeficator, link };
+
+    diesel::insert_into(qrcode::table)
+        .values(&new_qr)
+        .execute(conn)
+        .expect("Error saving new post");
 }
