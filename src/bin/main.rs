@@ -9,6 +9,7 @@ fn main() {
         let connection = &mut establish_connection();
 
         println!("What would you like your title to be?");
+        println!("{}", rand_indificator(5));
 
         let qr_type: String = Input::with_theme(&ColorfulTheme::default())
             .with_prompt("Your qr type:")

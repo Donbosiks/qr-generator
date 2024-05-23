@@ -9,5 +9,5 @@ diesel_cli = "2.1.1"
 dotenv = "0.15.0"
 dialoguer = "0.11.0"
 fast_qr = { version = "0.12.1", features = ["svg", "image"] }
-rand = "0.8.5"
+random-string = "1.1.0"
 

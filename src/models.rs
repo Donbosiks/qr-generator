@@ -1,3 +1,12 @@
+
+
+// models.rs is rust code where me work with diesel and MySql function
+// there placed all function, who needed to connect and create new posts
+
+
+
+
+
 use diesel::prelude::*;
 use diesel::mysql::MysqlConnection;
 use dotenv::dotenv;
@@ -39,3 +48,4 @@ pub fn create_post(conn: &mut MysqlConnection, indeficator: &str, link: &str) ->
         .execute(conn)
         .expect("Error saving new post");
 }
+
