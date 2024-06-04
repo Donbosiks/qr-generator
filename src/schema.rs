@@ -1,7 +1,7 @@
 diesel::table! {
     qrcode (id) {
         id -> Int4,
-        indeficator -> Varchar,
+        identifier -> Varchar,
         link -> Text,
     }
 }

@@ -34,14 +34,14 @@ pub fn establish_connection() -> MysqlConnection {
 #[derive(Insertable)]
 #[diesel(table_name = qrcode)]
 pub struct NewQr<'a> {
-    pub indeficator: &'a str,
+    pub identifier: &'a str,
     pub link: &'a str,
 }
 
-pub fn create_post(conn: &mut MysqlConnection, indeficator: &str, link: &str) -> () {
+pub fn create_post(conn: &mut MysqlConnection, identifier: &str, link: &str) -> () {
     use crate::schema::qrcode;
 
-    let new_qr = NewQr { indeficator, link };
+    let new_qr = NewQr { identifier, link };
 
     diesel::insert_into(qrcode::table)
         .values(&new_qr)

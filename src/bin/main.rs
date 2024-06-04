@@ -30,14 +30,14 @@ fn main() {
 
         // Online qr_code function with database insert
 
-        let indeficator: String = Input::with_theme(&ColorfulTheme::default())
+        let identifier: String = Input::with_theme(&ColorfulTheme::default())
             .with_prompt("Your indeficator:")
             .interact_text()
             .expect("Reason");
 
 
-        let _ = render_qr(&indeficator, &qr_type);
-        create_post(connection, &indeficator, &link);
+        let _ = render_qr(&identifier, &qr_type);
+        create_post(connection, &identifier, &link);
 
         break
 
