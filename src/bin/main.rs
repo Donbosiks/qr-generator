@@ -1,5 +1,5 @@
 use qr_code::*;
-use crate::models::{establish_connection, create_post};
+use crate::models::{establish_connection, create_post, find_identifier_value};
 use dialoguer::{theme::ColorfulTheme, Input};
 use qrcodes::render_qr;
 
@@ -9,7 +9,6 @@ fn main() {
         let connection = &mut establish_connection();
 
         println!("What would you like your title to be?");
-        println!("{}", rand_indificator(5));
 
         let qr_type: String = Input::with_theme(&ColorfulTheme::default())
             .with_prompt("Your qr type:")
@@ -30,17 +29,21 @@ fn main() {
 
         // Online qr_code function with database insert
 
-        let identifier: String = Input::with_theme(&ColorfulTheme::default())
-            .with_prompt("Your indeficator:")
-            .interact_text()
-            .expect("Reason");
+        loop {
+            let identifier = rand_indificator(5); // Generate random identifier for short link
 
+            let result = find_identifier_value(&identifier); // Check does exist identifier in db
 
-        let _ = render_qr(&identifier, &qr_type);
-        create_post(connection, &identifier, &link);
+            if  result == "exist" {
+                continue
+            }
+
+            let _ = render_qr(&identifier, &qr_type);  // Generate Qrcode
+            create_post(connection, &identifier, &link); // Insert Qrcode in db
+            break
+        }
 
         break
-
-    }
+        }
 
 }
