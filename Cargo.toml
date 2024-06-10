@@ -10,4 +10,5 @@ dotenv = "0.15.0"
 dialoguer = "0.11.0"
 fast_qr = { version = "0.12.1", features = ["svg", "image"] }
 random-string = "1.1.0"
-
+rocket = "0.5.1"
+tokio = "1.38.0"
