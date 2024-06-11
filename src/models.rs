@@ -14,6 +14,7 @@ use crate::schema::qrcode;
 use diesel::RunQueryDsl;
 use diesel::select;
 use diesel::dsl::exists;
+use rocket::serde::de::Unexpected::Str;
 
 
 pub fn establish_connection() -> MysqlConnection {
@@ -55,3 +56,16 @@ pub fn find_identifier_value(search_value: &str) -> &str {
         Err(_) => todo!(),
 
 }}
+
+pub fn find_link(ind: &str) -> String {
+    use crate::schema::qrcode::dsl::*;
+    let connection = &mut establish_connection();
+
+    let res = qrcode
+        .select(link)
+        .filter(identifier.eq(ind))
+        .first::<String>(connection)
+        .expect("Error loading link");
+
+    return res
+}

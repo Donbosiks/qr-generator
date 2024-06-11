@@ -1,11 +1,13 @@
 extern crate rocket;
 use rocket::*;
 use rocket::response::Redirect;
+use crate::models::find_link;
 
 #[get("/<identifier>")]
 fn test(identifier: &str) -> Redirect {
 
-    Redirect::to(uri!(hello: name, age))
+    let res_link = String::from(find_link(identifier));
+    Redirect::to(res_link)
 }
 
 #[launch]
