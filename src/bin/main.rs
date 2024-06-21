@@ -46,10 +46,15 @@ fn start() {
             .interact_text()
             .expect("Error");
 
+        let name: String = Input::with_theme(&ColorfulTheme::default())
+            .with_prompt("Your qrcode name: ")
+            .interact_text()
+            .expect("Error");
+
         // Offline qr_code function without database insert
 
         if qr_type == "offline" {
-            let _ = render_qr(&link, &qr_type);
+            let _ = render_qr(&name, &link, &qr_type);
             break
         }
 
@@ -60,11 +65,11 @@ fn start() {
 
             let result = find_identifier_value(connection, &identifier); // Check does exist identifier in db
 
-            if  result == "exist" {
+            if  result == true {
                 continue
             }
 
-            let _ = render_qr(&identifier, &qr_type);  // Generate Qrcode
+            let _ = render_qr(&name, &identifier, &qr_type);  // Generate Qrcode
             create_post(connection, &identifier, &link); // Insert Qrcode in db
             break
         }

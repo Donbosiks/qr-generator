@@ -40,15 +40,15 @@ pub fn create_post(conn: &mut MysqlConnection, identifier: &str, link: &str) -> 
         .execute(conn);
 }
 
-pub fn find_identifier_value<'a>(conn: &'a mut MysqlConnection, search_value: &'a str) -> &'a str {
+pub fn find_identifier_value<'a>(conn: &'a mut MysqlConnection, search_value: &'a str) -> bool {
     use crate::schema::qrcode::dsl::*;
 
     let result = select(exists(qrcode.filter(identifier.eq(&search_value))))
         .get_result::<bool>(conn);
 
     match result {
-        Ok(true) => return "exist",
-        Ok(false) => return "not exist",
+        Ok(true) => true,
+        Ok(false) => false,
         // Err(_) => println!("An error while searching identifier"),
         Err(_) => todo!(),
 
@@ -64,7 +64,7 @@ pub fn find_link(ind: &str) -> Option<String>  {
         .first::<String>(connection);
 
     match res {
-        Ok(_) => Some(res.expect("Error to get link")),
+        Ok(_) => Some(res.expect("Error to operation with finding link")),
         // Err(_) => return "none".into_string(),
         Err(_) => None,
 

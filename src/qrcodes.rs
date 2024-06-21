@@ -10,7 +10,7 @@ use fast_qr::convert::{image::ImageBuilder, Builder, Shape};
 use fast_qr::qr::QRBuilder;
 use std::env;
 
-pub fn render_qr(_link: &str, _qrtype: &str) -> Result<(), ConvertError> {
+pub fn render_qr(name: &str,_link: &str, _qrtype: &str) -> Result<(), ConvertError> {
 
         let mut domain_url = env::var("DOMAIN_URL").expect("DOMAIN_URL must be set");
 
@@ -30,7 +30,8 @@ pub fn render_qr(_link: &str, _qrtype: &str) -> Result<(), ConvertError> {
             .build()
             .unwrap();
 
-        let path = format!("./tmp/qrcode/{}.png", _link);
+
+        let path = format!("./tmp/qrcode/{}.png", name);
 
         let _img = ImageBuilder::default()
             .shape(Shape::Square)
@@ -38,5 +39,6 @@ pub fn render_qr(_link: &str, _qrtype: &str) -> Result<(), ConvertError> {
             .fit_width(600)
             .to_file(&qrcode, &path);
 
-        Ok(())
+        Ok(println!("Qrocde was generate"))
 }
+
