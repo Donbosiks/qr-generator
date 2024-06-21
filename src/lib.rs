@@ -1,6 +1,7 @@
 pub mod schema;
 pub mod models;
 pub mod qrcodes;
+pub mod web_page;
 extern crate rocket;
 
 // Import generate function

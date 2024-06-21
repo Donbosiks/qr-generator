@@ -4,7 +4,7 @@ use dialoguer::{theme::ColorfulTheme, Input};
 use qrcodes::render_qr;
 use std::thread;
 use tokio::runtime::Runtime;
-mod web_page;
+use web_page::rocket;
 
 
 #[rocket::main]
@@ -58,7 +58,7 @@ fn start() {
         loop {
             let identifier = rand_identifier(5); // Generate random identifier for short link
 
-            let result = find_identifier_value(&identifier); // Check does exist identifier in db
+            let result = find_identifier_value(connection, &identifier); // Check does exist identifier in db
 
             if  result == "exist" {
                 continue

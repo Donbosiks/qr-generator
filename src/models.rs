@@ -14,7 +14,6 @@ use crate::schema::qrcode;
 use diesel::RunQueryDsl;
 use diesel::select;
 use diesel::dsl::exists;
-use rocket::serde::de::Unexpected::Str;
 
 
 pub fn establish_connection() -> MysqlConnection {
@@ -36,18 +35,16 @@ pub fn create_post(conn: &mut MysqlConnection, identifier: &str, link: &str) -> 
     use crate::schema::qrcode;
     let new_qr = NewQr { identifier, link };
 
-    diesel::insert_into(qrcode::table)
+    let _ins = diesel::insert_into(qrcode::table)
         .values(&new_qr)
-        .execute(conn)
-        .expect("Error saving new post");
+        .execute(conn);
 }
 
-pub fn find_identifier_value(search_value: &str) -> &str {
-    let connection = &mut establish_connection();
+pub fn find_identifier_value<'a>(conn: &'a mut MysqlConnection, search_value: &'a str) -> &'a str {
     use crate::schema::qrcode::dsl::*;
 
-    let result = select(exists(qrcode.filter(crate::schema::qrcode::dsl::identifier.eq(&search_value))))
-        .get_result::<bool>(connection);
+    let result = select(exists(qrcode.filter(identifier.eq(&search_value))))
+        .get_result::<bool>(conn);
 
     match result {
         Ok(true) => return "exist",
@@ -57,15 +54,20 @@ pub fn find_identifier_value(search_value: &str) -> &str {
 
 }}
 
-pub fn find_link(ind: &str) -> String {
+pub fn find_link(ind: &str) -> Option<String>  {
     use crate::schema::qrcode::dsl::*;
     let connection = &mut establish_connection();
 
     let res = qrcode
         .select(link)
         .filter(identifier.eq(ind))
-        .first::<String>(connection)
-        .expect("Error loading link");
+        .first::<String>(connection);
 
-    return res
+    match res {
+        Ok(_) => Some(res.expect("Error to get link")),
+        // Err(_) => return "none".into_string(),
+        Err(_) => None,
+
+    }
+
 }
