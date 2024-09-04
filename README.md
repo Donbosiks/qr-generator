@@ -20,13 +20,19 @@ This is not a big project to create regular QR codes or Dynamic to collect basic
 ### Installation on Arch Linux
 
 **1. Step**
-```git clone https://github.com/Donbosiks/qr-generator.git```
+```bash
+git clone https://github.com/Donbosiks/qr-generator.git
+```
 
 **2. Step**
-```chmod +x install.sh```
+```bash
+chmod +x install.sh
+```
 
 **3. Step**
-```sudo ./install.sh```
+```bash
+sudo ./install.sh
+```
 
 At this stage, you will have all the current functions written in the project working on the local host. If you want them to be accessible from outside, you will have to configure `nginx`.
 
