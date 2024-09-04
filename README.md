@@ -14,8 +14,8 @@ This is not a big project to create regular QR codes or Dynamic to collect basic
 * Creating dynamic statistics
 * Combining dynamic QR into groups
 * Collecting information about the number of visits 
-*    -> Unique visits
-*    -> All visits
+`-> Unique visits`
+`-> All visits`
 
 ### Installation on Arch Linux
 
