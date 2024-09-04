@@ -4,18 +4,18 @@ This is not a big project to create regular QR codes or Dynamic to collect basic
 
 ### Features available now 
 
-• Creating regular QR code
-• Creating dynamic QR code
-• Momental redirect from your domain 
+* Creating regular QR code
+* Creating dynamic QR code
+* Momental redirect from your domain 
 
 ### Features in the plans
 
-• Collecting information about the time of visit 
-• Creating dynamic statistics
-• Combining dynamic QR into groups
-• Collecting information about the number of visits 
-    -> Unique visits
-    -> All visits
+* Collecting information about the time of visit 
+* Creating dynamic statistics
+* Combining dynamic QR into groups
+* Collecting information about the number of visits 
+*    -> Unique visits
+*    -> All visits
 
 ### Installation on Arch Linux
 
