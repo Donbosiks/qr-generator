@@ -7,12 +7,5 @@ Cargo.lock
 .env
 *.env
 **/.env
-
-#/*
-#!src/
-#!migrations/
-#!.gitignore
-#!Cargo.toml
-#!README.md
-#!Rocket.toml
-#!diesel.toml
+env
+.env.local
