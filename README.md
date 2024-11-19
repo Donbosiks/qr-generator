@@ -10,6 +10,8 @@ This is not a big project to create regular QR codes or Dynamic to collect basic
 
 ### Features in the plans
 
+* Create Website with profiles
+* Show all user's qr codes
 * Collecting information about the time of visit 
 * Creating dynamic statistics
 * Combining dynamic QR into groups
@@ -34,5 +36,5 @@ chmod +x install.sh
 sudo ./install.sh
 ```
 
-At this stage, you will have all the current functions written in the project working on the local host. If you want them to be accessible from outside, you will have to configure `nginx`.
+At this stage, you will have all the current functions written in the project working on the localhost. If you want them to be accessible from outside, you will have to configure `nginx`.
 
